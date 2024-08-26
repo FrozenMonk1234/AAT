@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<PageTitle>Login</PageTitle>
+<div class="col-12 row">
+
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" id="name" @bind="Model.Name" />
+            <label class="form-label" for="name">Name</label>
+        </div>
+    </div>
+
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" type="password" id="password" @bind="Model.Password" />
+            <label class="form-label" for="password">Password</label>
+        </div>
+    </div>
+</div>
+<div class="col-6" style="margin:10px">
+    <button class="btn btn-primary" @onclick="OnSubmit">Login</button>
+</div>

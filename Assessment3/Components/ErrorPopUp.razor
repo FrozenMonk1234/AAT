@@ -1,0 +1,13 @@
+﻿<center>
+    <h5 style="color:red">
+        <span class="pointer-event oi-circle-x" @onclick="OnClickClose"></span>
+        @Message
+    </h5>
+</center>
+@code {
+    [Parameter] public string Message { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private async void OnClickClose() => await OnClose.InvokeAsync();
+
+}

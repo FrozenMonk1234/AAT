@@ -1,0 +1,81 @@
+﻿@page "/Events"
+@using Assessment3.Components
+
+<PageTitle>Home</PageTitle>
+@if (IsSuccess)
+{
+    <SuccessPopUp Message="@SuccessMessage" OnClose="@(() => IsSuccess = false)"></SuccessPopUp>
+}
+@if (IsError)
+{
+    <ErrorPopUp Message="@ErrorMessage" OnClose="@(() => IsError = false)"></ErrorPopUp>
+}
+
+@if (showEventModal)
+{
+    <div class="modal" style="display:block; backdrop-filter:blur(8px); z-index:1; align-content:center" aria-model="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content justify-content-start" style="width:83vw; height:75vh; left:-28vw">
+                <div class="modal-body" style="margin:auto">
+                    <EventModal Action="Register"
+                                Model="SelectedModel"
+                                OnClose="@(() => showEventModal = false)"
+                                OnSubmit="OnSubmitRegister">
+                    </EventModal>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@if (IsLoading)
+{
+    <div style="margin-block:10vh">
+        <center>
+            <Loader></Loader>
+        </center>
+    </div>
+
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col text-center mb-3" style="margin:10px">
+                <h2 class="display-4">Available Events</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-xxl mt-2 bg-light border-1 border-secondary rounded shadow" style="padding-top:10px; margin-bottom:50px">
+        <div class="col-lg text-start table table-responsive">
+            <table class="table table-striped bg-light text-center">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Total Seats</th>
+                        <th>Available Seats</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in EventsFilterd)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Date</td>
+                            <td>@item.TotalSeats</td>
+                            <td>@(SeatAvailable(item.SeatsTaken, item.TotalSeats))</td>
+                            <td>@item.Description</td>
+                            <td><button disabled="@(item.TotalSeats == item.SeatsTaken || IsUserRegisterd(item.Id) == true)" @onclick="() => OnClickRegister(item)">Register</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+

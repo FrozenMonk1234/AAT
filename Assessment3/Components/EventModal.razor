@@ -1,0 +1,68 @@
+﻿@using Assessment3.Models
+<div class="col-12 row">
+
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating" style="margin:10px">
+            <input class="form-control" id="name" @bind="Model.Name" disabled="@(Action == "Register")" />
+            <label class="form-label" for="name">Name</label>
+        </div>
+    </div>
+
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <InputDate class="form-control" type="date" id="date" @bind-Value="Model.Date" disabled="@(Action == "Register")" />
+            <label class="form-label" for="date">Date</label>
+        </div>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" id="Number" @bind="Model.Location.Number" disabled="@(Action == "Register")" />
+            <label class="form-label" for="Number">Street Number</label>
+        </div>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" id="Street" @bind="Model.Location.Street" disabled="@(Action == "Register")" />
+            <label class="form-label" for="Street">Street</label>
+        </div>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" id="Suburb" @bind="Model.Location.Suburb" disabled="@(Action == "Register")" />
+            <label class="form-label" for="Suburb">Suburb</label>
+        </div>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" id="PostalCode" @bind="Model.Location.PostalCode" disabled="@(Action == "Register")" />
+            <label class="form-label" for="PostalCode">Postal Code</label>
+        </div>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <div class="form-floating">
+            <input class="form-control" id="Country" @bind="Model.Location.Country" disabled="@(Action == "Register")" />
+            <label class="form-label" for="Country">Country</label>
+        </div>
+    </div>
+    <div class="col-12" style="margin:10px">
+        <div class="form-floating">
+            <InputTextArea style="height:5vh" class="form-control" type="text" id="description" @bind-value="Model.Description" disabled="@(Action == "Register")"/>
+            <label class="form-label" for="description">Description</label>
+        </div>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <button class="btn btn-primary" @onclick="async () => await OnSubmit.InvokeAsync(Model)">@Action</button>
+    </div>
+    <div class="col-6" style="margin:10px">
+        <button class="btn btn-secondary" @onclick="async () => await OnClose.InvokeAsync()">Close</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback<Event> OnSubmit { get; set; }
+    [Parameter] public Models.Event Model { get; set; } = new();
+    [Parameter] public string Action { get; set; } = string.Empty;
+
+
+}
